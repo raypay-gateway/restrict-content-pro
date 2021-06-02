@@ -1,0 +1,77 @@
+# Copyright (C) 2021 RayPay
+# This file is distributed under the same license as the RayPay for Restrict Content Pro (RCP) plugin.
+msgid ""
+msgstr ""
+
+msgid "RayPay for Restrict Content Pro"
+msgstr ""
+
+msgid "<a href=\"https://raypay.ir\">RayPay</a> secure payment gateway for Restrict Content Pro"
+msgstr ""
+
+msgid "RayPay"
+msgstr ""
+
+msgid "https://raypay.ir"
+msgstr ""
+
+msgid "RayPay Payment Gateway"
+msgstr ""
+
+msgid "RayPay gateway settings"
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "You can receive your User ID by going to your RayPay panel"
+msgstr ""
+
+msgid "RayPay User ID is missing"
+msgstr ""
+
+
+msgid "Acceptor Code"
+msgstr ""
+
+msgid "You can receive your Acceptor Code by going to your RayPay panel"
+msgstr ""
+
+msgid "RayPay Acceptor Code is missing"
+msgstr ""
+
+msgid "Show currency?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "An error occurred while creating the transaction."
+msgstr ""
+
+
+msgid "Payment was successful."
+msgstr ""
+
+msgid "Payment was unsuccessful."
+msgstr ""
+
+msgid "RayPay Invoice ID:"
+msgstr ""
+
+
+msgid "Payment failed due to the following reason: "
+msgstr ""
+
+
+msgid "An error occurred."
+msgstr ""
+
+
+msgid "An error occurred while verifying the transaction."
+msgstr ""
+
+
