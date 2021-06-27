@@ -70,7 +70,7 @@ function rcp_raypay_create_payment( $subscription_data ) {
 
 
 
-    $response = rcp_raypay_call_gateway_endpoint( 'http://185.165.118.211:14000/raypay/api/v1/Payment/getPaymentTokenWithUserID', $args );
+    $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/getPaymentTokenWithUserID', $args );
     if ( is_wp_error( $response ) ) {
 		rcp_errors()->add( 'raypay_error', __( 'An error occurred while creating the transaction.' ) , 'register' );
 		return;
@@ -158,7 +158,7 @@ function rcp_raypay_verify() {
         'timeout' => 15,
     );
 
-        $response = rcp_raypay_call_gateway_endpoint( 'http://185.165.118.211:14000/raypay/api/v1/Payment/checkInvoice?pInvoiceID=' . $invoice_id, $args );
+        $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/checkInvoice?pInvoiceID=' . $invoice_id, $args );
         if ( is_wp_error( $response ) ) {
             wp_die(  __( 'An error occurred while verifying the transaction.' )  );
         }
