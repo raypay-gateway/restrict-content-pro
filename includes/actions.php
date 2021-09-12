@@ -41,10 +41,11 @@ function rcp_raypay_create_payment( $subscription_data ) {
 
     // Send the request to RayPay.
     $user_id = isset( $rcp_options['raypay_user_id'] ) ? $rcp_options['raypay_user_id'] : wp_die( __( 'RayPay User ID is missing' ) );
-    $acceptor_code = isset( $rcp_options['raypay_acceptor_code'] ) ? $rcp_options['raypay_acceptor_code'] : wp_die( __( 'RayPay Acceptor Code is missing' ) );
+    $marketing_id = isset( $rcp_options['raypay_marketing_id'] ) ? $rcp_options['raypay_marketing_id'] : wp_die( __( 'RayPay Marketing ID is missing' ) );
+    $sandbox = ( isset( $rcp_options['raypay_sandbox'] ) && $rcp_options['raypay_sandbox'] == 'yes' ) ? true : false;
     $invoice_id = round(microtime(true)*1000) ;
     $callback = add_query_arg( 'gateway', 'raypay-for-rcp', $subscription_data['return_url'] );
-    $callback .= "&order_id=" . $subscription_data['payment_id'] . '&';
+    $callback .= "&order_id=" . $subscription_data['payment_id'];
 
     $data = array(
         'amount' => strval($amount),
@@ -52,7 +53,8 @@ function rcp_raypay_create_payment( $subscription_data ) {
         'userID' => $user_id,
         'redirectUrl' => $callback,
         'factorNumber' => strval($subscription_data['payment_id']),
-        'acceptorCode' => $acceptor_code,
+        'marketingID' => $marketing_id,
+        'enableSandBox' => $sandbox,
         'email' => $subscription_data['user_email'],
         'fullName' => $subscription_data['user_name'],
         'comment' => "{$subscription_data['subscription_name']} - {$subscription_data['key']}"
@@ -70,7 +72,7 @@ function rcp_raypay_create_payment( $subscription_data ) {
 
 
 
-    $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/getPaymentTokenWithUserID', $args );
+    $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/pay', $args );
     if ( is_wp_error( $response ) ) {
 		rcp_errors()->add( 'raypay_error', __( 'An error occurred while creating the transaction.' ) , 'register' );
 		return;
@@ -91,12 +93,12 @@ function rcp_raypay_create_payment( $subscription_data ) {
     $rcp_payments = new RCP_Payments();
     $rcp_payments->update( $subscription_data['payment_id'], array( 'invoice_id' => $invoice_id ) );
 
-    $access_token = $result->Data->Accesstoken;
-    $terminal_id = $result->Data->TerminalID;
+    $token = $result->Data;
 
     ob_end_clean();
 
-    ryapay_rcp_send_data_shaparak($access_token , $terminal_id);
+    $link='https://my.raypay.ir/ipg?token=' . $token;
+    wp_redirect($link);
 
     exit;
 }
@@ -122,9 +124,8 @@ function rcp_raypay_verify() {
     global $rcp_options, $wpdb, $rcp_payments_db_name;
 
     $order_id = sanitize_text_field($_GET['order_id']);
-    $invoice_id = sanitize_text_field($_GET['?invoiceID']);
 
-    if( empty($order_id) || empty($invoice_id) ){
+    if( empty($order_id) ){
         return;
     }
 
@@ -153,12 +154,12 @@ function rcp_raypay_verify() {
     );
 
     $args = array(
-        'body' => json_encode($data),
+        'body' => json_encode($_POST),
         'headers' => $headers,
         'timeout' => 15,
     );
 
-        $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/checkInvoice?pInvoiceID=' . $invoice_id, $args );
+        $response = rcp_raypay_call_gateway_endpoint( 'https://api.raypay.ir/raypay/api/v1/Payment/verify', $args );
         if ( is_wp_error( $response ) ) {
             wp_die(  __( 'An error occurred while verifying the transaction.' )  );
         }
@@ -169,8 +170,9 @@ function rcp_raypay_verify() {
 
         $fault = '';
 
-        $state = $result->Data->State;
+        $state = $result->Data->Status;
         $verify_amount = $result->Data->Amount;
+        $verify_invoice_id = $result->Data->invoiceID;
 
         if ( 200 !== $http_status ) {
             $status = 'failed';
@@ -188,13 +190,13 @@ function rcp_raypay_verify() {
                     'subscription_key'	=> $payment_data->subscription_key,
                     'amount'			=> $verify_amount,
                     'user_id'			=> $user_id,
-                    'transaction_id'	=> $invoice_id,
+                    'transaction_id'	=> $verify_invoice_id,
                 );
 
                 $rcp_payments = new RCP_Payments();
                 $payment_id = $rcp_payments->insert( $payment_data );
                 $rcp_payments->update( $order_id, array( 'status' => 'complete' ) );
-                rcp_raypay_set_verification( $payment_id, $invoice_id );
+                rcp_raypay_set_verification( $payment_id, $verify_invoice_id );
 
 //                $new_subscription_id = get_user_meta( $user_id, 'rcp_subscription_level_new', true );
 //                if ( ! empty( $new_subscription_id ) ) {
@@ -222,7 +224,7 @@ function rcp_raypay_verify() {
 
                 $log_data = array(
                     'post_title'   => __( 'Payment complete', 'raypay-for-rcp' ),
-                    'post_content' => __( 'RayPay Invoice ID: ', 'raypay-for-rcp' ) . $invoice_id,
+                    'post_content' => __( 'RayPay Invoice ID: ', 'raypay-for-rcp' ) . $verify_invoice_id,
                     'post_parent'  => 0,
                     'log_type'     => 'gateway_error'
                 );

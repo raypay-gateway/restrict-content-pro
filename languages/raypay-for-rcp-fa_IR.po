@@ -45,14 +45,20 @@ msgstr "شما میتوانید شناسه کاربری خود را از پنل 
 msgid "RayPay User ID is missing"
 msgstr "شناسه کاربری رای پی وارد نشده است"
 
-msgid "Acceptor Code"
-msgstr "کد پذیرنده"
+msgid "Marketing ID"
+msgstr "شناسه کسب و کار"
 
-msgid "You can receive your Acceptor Code by going to your RayPay panel"
-msgstr "شما میتوانید کد پذیرنده خود را از پنل رای پی دریافت کنید"
+msgid "You can receive your Marketing ID by going to your RayPay panel"
+msgstr "شما میتوانید شناسه کسب و کار خود را از پنل رای پی دریافت نمایید"
 
-msgid "RayPay Acceptor Code is missing"
-msgstr "کد پذیرنده رای پی وارد نشده است"
+msgid "RayPay Marketing ID is missing"
+msgstr "شناسه کسب و کار رای پی وارد نشده است"
+
+msgid "Sandbox mode"
+msgstr "حالت SandBox"
+
+msgid "If you check this option, the gateway will work in Test (Sandbox) mode."
+msgstr "اگر این گزینه را فعال نماپید، پرداخت در محیط تست رای پی انجام می گیرد."
 
 msgid "Show currency?"
 msgstr "نمایش واحد پول؟"
@@ -70,7 +76,7 @@ msgid "Payment was successful."
 msgstr "پرداخت با موفقیت انجام شد."
 
 msgid "Payment was unsuccessful."
-msgstr "خطا در پرداخت رخ داده است."
+msgstr "خطایی در پرداخت رخ داده است."
 
 msgid "RayPay Invoice ID:"
 msgstr "شناسه ارجاع بانکی رای پی :"
@@ -83,6 +89,15 @@ msgstr "خطایی رخ داده است."
 
 msgid "An error occurred while verifying the transaction."
 msgstr "خطایی هنگام استعلام تراکنش رخ داده است."
+
+#~ msgid "Acceptor Code"
+#~ msgstr "کد پذیرنده"
+
+#~ msgid "You can receive your Acceptor Code by going to your RayPay panel"
+#~ msgstr "شما میتوانید کد پذیرنده خود را از پنل رای پی دریافت کنید"
+
+#~ msgid "RayPay Acceptor Code is missing"
+#~ msgstr "کد پذیرنده رای پی وارد نشده است"
 
 #~ msgid "Order number #"
 #~ msgstr "شماره سفارش #"

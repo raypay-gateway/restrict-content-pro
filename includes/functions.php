@@ -31,15 +31,6 @@ function rcp_raypay_call_gateway_endpoint( $url, $args ) {
 	return $response;
 }
 
-function ryapay_rcp_send_data_shaparak($access_token , $terminal_id){
-    echo '<p style="color:#ff0000; font:18px Tahoma; direction:rtl;">در حال اتصال به درگاه بانکی. لطفا صبر کنید ...</p>';
-    echo '<form name="frmRayPayPayment" method="post" action=" https://mabna.shaparak.ir:8080/Pay ">';
-    echo '<input type="hidden" name="TerminalID" value="' . $terminal_id . '" />';
-    echo '<input type="hidden" name="token" value="' . $access_token . '" />';
-    echo '<input class="submit" type="submit" value="پرداخت" /></form>';
-    echo '<script>document.frmRayPayPayment.submit();</script>';
-}
-
 /**
  * Check the payment ID in the system.
  *

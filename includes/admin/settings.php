@@ -31,11 +31,25 @@ function rcp_raypay_settings( $rcp_options ) {
 		</tr>
         <tr valign="top">
             <th>
-                <label for="rcp_settings[raypay_acceptor_code]" id="raypayAcceptorCode"><?php _e( 'Acceptor Code', 'raypay-for-rcp' ); ?></label>
+                <label for="rcp_settings[raypay_marketing_id]" id="raypayAcceptorCode"><?php _e( 'Marketing ID', 'raypay-for-rcp' ); ?></label>
             </th>
             <td>
-                <input class="regular-text" name="rcp_settings[raypay_acceptor_code]" id="raypayAcceptorCode" value="<?php echo isset( $rcp_options['raypay_acceptor_code'] ) ? $rcp_options['raypay_acceptor_code'] : ''; ?>">
-                <p class="description"><?php _e( 'You can receive your Acceptor Code by going to your RayPay panel', 'raypay-for-rcp' ); ?></p>
+                <input class="regular-text" name="rcp_settings[raypay_marketing_id]" id="raypayMarketingID" value="<?php echo isset( $rcp_options['raypay_marketing_id'] ) ? $rcp_options['raypay_marketing_id'] : ''; ?>">
+                <p class="description"><?php _e( 'You can receive your Marketing ID by going to your RayPay panel', 'raypay-for-rcp' ); ?></p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <th>
+                <label for="rcp_settings[raypay_sandbox]" id="raypaySandbox"><?php _e( 'Sandbox mode', 'raypay-for-rcp' ); ?></label>
+            </th>
+            <td>
+                <p class="description">
+                    <select id="rcp_settings[raypay_sandbox]" name="rcp_settings[raypay_sandbox]">
+                        <option value="yes" <?php selected('yes', isset($rcp_options['raypay_sandbox']) ? $rcp_options['raypay_sandbox'] : '');?>><?php _e('Yes', 'raypay-for-rcp');?></option>
+                        <option value="no" <?php selected('no', isset($rcp_options['raypay_sandbox']) ? $rcp_options['raypay_sandbox'] : '');?>><?php _e('No', 'raypay-for-rcp');?></option>
+                    </select>
+                    <?php _e( 'If you check this option, the gateway will work in Test (Sandbox) mode.', 'raypay-for-rcp' ); ?>
+                </p>
             </td>
         </tr>
 		<tr valign="top">

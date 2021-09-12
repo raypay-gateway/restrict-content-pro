@@ -31,14 +31,21 @@ msgid "RayPay User ID is missing"
 msgstr ""
 
 
-msgid "Acceptor Code"
+msgid "Marketing ID"
 msgstr ""
 
-msgid "You can receive your Acceptor Code by going to your RayPay panel"
+msgid "You can receive your Marketing ID by going to your RayPay panel"
 msgstr ""
 
-msgid "RayPay Acceptor Code is missing"
+msgid "RayPay Marketing ID is missing"
 msgstr ""
+
+msgid "Sandbox mode"
+msgstr "حالت SandBox"
+
+
+msgid "If you check this option, the gateway will work in Test (Sandbox) mode."
+msgstr "اگر این گزینه را فعال کنید، پرداخت به صورت آزمایشی انجام خواهد شد."
 
 msgid "Show currency?"
 msgstr ""

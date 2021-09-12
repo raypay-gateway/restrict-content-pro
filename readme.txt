@@ -18,12 +18,12 @@ RayPay provides some payment services and this plugin enables the RayPay's payme
 
 == Installation ==
 
-After creating a web service on https://raypay.ir and getting an UserID and AcceptorCode, follow this instruction:
+After creating a web service on https://raypay.ir and getting an UserID and MarketingID, follow this instruction:
 
 1. Activate plugin RayPay for Restrict Content Pro.
 2. Go to RCP > Settings > Payment Gateways.
 3. Check "RayPay" option in the Payment Gateways section.
-4. Enter your UserID and AcceptorCode in "RayPay payment gateway" section.
+4. Enter your UserID and MarketingID in "RayPay payment gateway" section.
 
 After that, if a customer is going to purchase a membership plan which is created by Restrict Content Pro, The RayPay payment gateway will appear and she can pay with it.
 
