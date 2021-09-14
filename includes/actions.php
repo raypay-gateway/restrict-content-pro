@@ -172,7 +172,7 @@ function rcp_raypay_verify() {
 
         $state = $result->Data->Status;
         $verify_amount = $result->Data->Amount;
-        $verify_invoice_id = $result->Data->invoiceID;
+        $verify_invoice_id = $result->Data->InvoiceID;
 
         if ( 200 !== $http_status ) {
             $status = 'failed';
